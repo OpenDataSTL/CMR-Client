@@ -26,7 +26,7 @@ export default function App() {
           }) }
         </div>
       </div>
-      <Hidden smDown>
+      <Hidden mdDown>
         <div className='navbar'>
           <ol className='navbar-sticky'>
             { Steps.steps.map((data, index) => {

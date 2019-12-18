@@ -9,7 +9,7 @@ export default function Step(props) {
     >
       <div className='step-content'>
         <h3 className='step-header-text'>{ props.headerText }</h3> 
-        <p className='step-body-text'>{ props.bodyText }</p> 
+        <p className='step-body-text' dangerouslySetInnerHTML={{__html: props.bodyText}}></p> 
       </div>
     </div>
   );
