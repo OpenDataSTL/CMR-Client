@@ -1,3 +1,7 @@
+:root {
+  --header-height: 100px;
+}
+
 html, body, div { padding: 0px; margin: 0px; }
 h1, h2, h3, h4, h5 { 
     font-family: 'Merriweather', serif;
@@ -29,7 +33,7 @@ body{
 
 .header  {  
     width: 100vw;
-    height: 100px;
+    height: var(--header-height);
     top: 0;
     left: 0;
     padding-left: 16px;
@@ -72,7 +76,7 @@ body{
     position: fixed;
     margin: 32px 0px;
     padding: 0;
-    top: 280px;
+    top: 20vh;
     right: 0;
     min-width: 180px;
     overflow-x: visible;
@@ -107,7 +111,7 @@ body{
 }
 
 .step {
-    scroll-margin-top: 100px;
+    scroll-margin-top: var(--header-height);
     width: 100vw;
     padding: 64px;
     display: grid;

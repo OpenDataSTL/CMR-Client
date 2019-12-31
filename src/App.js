@@ -32,7 +32,7 @@ export default function App() {
     };
   };
 
-    // Finds the current visible section
+  // Finds the current visible section
   useEffect(() => {
     const handleScroll = () => {
       const { height: headerHeight } = getDimensions(headerRef.current);
