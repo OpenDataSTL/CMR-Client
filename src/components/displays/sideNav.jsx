@@ -8,17 +8,10 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const doScroll = () => {
-      document.getElementById(stepIDName(this.props.stepNumber)).scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-      });
-    }
-
     return (
       <li 
         className={`hover ${this.state.sectionInView ? 'navbar-in-view' : 'navbar-not-in-view'}`}
-        onClick={doScroll}
+        onClick={ this.props.onClick }
       >
         {this.props.navName}
       </li>

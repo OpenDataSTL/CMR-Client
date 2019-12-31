@@ -103,6 +103,7 @@ body{
 }
 
 .step {
+    scroll-margin-top: 100px;
     width: 100vw;
     padding: 64px;
     display: grid;
