@@ -38,6 +38,10 @@ body{
     position: fixed;
 }
 
+.bottom-spacer {
+  height: 70vh;
+}
+
 .footer  { 
     background-color: rgb(14, 33, 44);
     width:110%;

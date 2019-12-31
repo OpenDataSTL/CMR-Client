@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import Step from './components/displays/step';
 import NavBar from './components/displays/sideNav';
@@ -9,7 +9,7 @@ import { stepIDName } from './css.js'
 const Steps = require("./data/config");
 
 export default function App() {
-  const [visibleSection, setVisibleSection] = useState(); // Hook for visible section state
+  const [currentStepNumber, setCurrentStepNumber] = useState(1); // Hook for visible section state
   const headerRef = useRef(null); // Header height reference
 
   const doScroll = id => {
@@ -19,9 +19,55 @@ export default function App() {
     });
   };
 
+  // Gets the top and bottom y offsets of a given element
+  const getDimensions = ele => {
+    const { height } = ele.getBoundingClientRect();
+    const offsetTop = ele.offsetTop;
+    const offsetBottom = offsetTop + height;
+
+    return {
+      height,
+      offsetTop,
+      offsetBottom
+    };
+  };
+
+    // Finds the current visible section
+  useEffect(() => {
+    const handleScroll = () => {
+      const { height: headerHeight } = getDimensions(headerRef.current);
+      const scrollPosition = window.scrollY + headerHeight;
+
+      const currentIndex = Steps.steps.findIndex( (_, index) =>  {
+        const ele = document.getElementById(stepIDName(index + 1))
+
+        if (ele) {
+          const { offsetBottom, offsetTop } = getDimensions(ele);
+          return scrollPosition >= offsetTop && scrollPosition < offsetBottom;
+        }
+        return false
+      });
+
+      if (currentIndex === undefined) {
+        return 
+      };
+
+      const stepNumber = currentIndex + 1
+
+      if (stepNumber !== currentStepNumber) {
+        setCurrentStepNumber(stepNumber);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [currentStepNumber]);
+
   return (
     <div className='app'>
-      <div className='header'>
+      <div className='header' ref={headerRef}>
         <h1>Clear My Missouri Record</h1>
       </div>
 
@@ -41,20 +87,20 @@ export default function App() {
       <Hidden mdDown>
         <div className='navbar'>
           <ol className='navbar-sticky'>
-            {Steps.steps.map((data, index) => {
+            {Steps.steps.map((step, index) => {
               return (
                 <NavBar
                   key={index.toString()}
-                  onClick = { () => doScroll(stepIDName(index + 1)) }
-                  stepNumber={index + 1}
-                  {...data}
+                  onClick={() => doScroll(stepIDName(index + 1))}
+                  isCurrent={currentStepNumber === index + 1}
+                  name={step.navName}
                 />
               );
             })}
           </ol>
         </div>
       </Hidden>
-
+      <div className='bottom-spacer' />
       <div className='footer'>
         <div className='footer-content'>footer placeholder</div>
       </div>
