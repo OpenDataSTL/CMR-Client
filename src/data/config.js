@@ -64,20 +64,49 @@ export const steps = [
     `,
   },
   { 
-    navName: 'Requirements',
-    headerText: 'What Will I Need?',
-    bodyText: 'Personal information will go here.',
+    navName: 'Information',
+    headerText: 'What Information Will I Need?',
+    bodyText: 
+    `<h3>To start the expungment petition you will need to gather some personal information.</h3>
+    <h3>Personal Information:</h3>
+    <p><ul><li>First and last name</li>
+    <li>Sex</li>
+    <li>Race</li>
+    <li>Driver's license number (if applicable)</li>
+    <li>Current address</li></ul></p>
+
+    <h3>Criminal Information:</h3>
+    <p><ul><li>Name of each crime you want expunged</li>
+    <li>Date each crime occurred</li>
+    <li>Name of county and/or municipality crime occurred in</li>
+    <li>Case number for each crime</li>
+    <li>Name of court your crime was heard in</li></ul></p>
+    
+    <h3>Court, Police, and Attorney Information (Where Applicable):</h3>
+    <p><ul><li>The circuit court division for your case</li>
+    <li>The associative court division for your case</li>
+    <li>The municipal court division for your case</li>
+    <li>The criminal records repository contact for your case</li>
+    <li>The county sheriff's department for your case</li>
+    <li>The municipal police department for your case</li>
+    <li>The Missouri highway patrol troop for your case</li>
+    <li>The country prosecutor's office for your case</li>
+    <li>The municipal prosecutor's office for your case</li></ul></p>
+    `,
   },
   { 
+    navName: 'Submit Paperwork',
+    headerText: 'Create and Submit your Petition',
+    bodyText: 
+    `<p>Once you have gathered enough information, you can create your petition. You can get a copy of the petition (add link here) to print and fill out, or you can fill it out online and print it. When your petition is complete take it to an expungement clinit or expungement center. You can find a list of these (another link to add here).</p>
+    `,
+  },
+  /*{ 
     navName: 'People You Need',
     headerText: 'Who Can Help Me?',
     bodyText: 'Identify the defendents. Mention lawyers.',
   },
-  { 
-    navName: 'Submit Paperwork',
-    headerText: 'Send in the Paperwork.',
-    bodyText: '',
-  },
+
   { 
     navName: 'Notify Parties',
     headerText: 'Notifes Interested Parties.',
@@ -87,5 +116,5 @@ export const steps = [
     navName: 'Receive Results',
     headerText: 'Your Record Will Be Removed Soon.',
     bodyText: '',
-  },
+  },*/
 ];
