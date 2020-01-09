@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 
 import HeaderLink from './components/displays/headerLink'
+import ScrollToTop from './components/logic/scrollToTop'
+
 import Info from './pages/info';
 import Eligiblity from './pages/eligibility';
 import NoMatch from './pages/noMatch'
@@ -45,6 +47,7 @@ export default function App() {
             ))}
           </div>
         </div>
+          <ScrollToTop />
           <Switch>
             {routes.map((route) => (
               <Route 
