@@ -47,21 +47,21 @@ export default function App() {
             ))}
           </div>
         </div>
-          <ScrollToTop />
-          <Switch>
-            {routes.map((route) => (
-              <Route 
-                exact path={route.path} 
-                component={route.component} 
-                key={route.path}
-              />
-            ))}
-            <Redirect 
-              exact from={homePath}
-              to={routes[0].path} 
+        <ScrollToTop />
+        <Switch>
+          {routes.map((route) => (
+            <Route 
+              exact path={route.path} 
+              component={route.component} 
+              key={route.path}
             />
-            <Route component={NoMatch} />
-          </Switch>
+          ))}
+          <Redirect 
+            exact from={homePath}
+            to={routes[0].path} 
+          />
+          <Route component={NoMatch} />
+        </Switch>
         <div className='bottom-spacer' />
         <div className='footer'>
           <div className='footer-content'>footer placeholder</div>
