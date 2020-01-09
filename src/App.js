@@ -14,6 +14,7 @@ import NoMatch from './pages/noMatch'
 
 const homePath = '/';
 
+// Add new page components here:
 const routes = [
   {
     path: '/info',
