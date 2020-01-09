@@ -1,10 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
 
 import Step from '../components/displays/step';
 import NavBar from '../components/displays/sideNav';
@@ -43,8 +37,6 @@ export default function Info() {
       const headerHeight = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 
         10);
-
-      console.log(headerHeight)
 
       const scrollPosition = window.scrollY + headerHeight;
 
