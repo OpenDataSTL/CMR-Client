@@ -1,109 +1,72 @@
 import React, { useState, useRef, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
 
-import Step from './components/displays/step';
-import NavBar from './components/displays/sideNav';
-import Hidden from '@material-ui/core/Hidden';
+import HeaderLink from './components/displays/headerLink'
+import ScrollToTop from './components/logic/scrollToTop'
 
-import { stepIDName } from './css.js'
+import Info from './pages/info';
+import Eligiblity from './pages/eligibility';
+import NoMatch from './pages/noMatch'
 
-const Steps = require("./data/config");
+const homePath = '/';
+
+// Add new page components here:
+const routes = [
+  {
+    path: '/info',
+    label: 'Info',
+    component: Info
+  },
+  {
+    path: '/eligibility',
+    label: 'Eligiblity',
+    component: Eligiblity
+  }
+]
 
 export default function App() {
-  const [currentStepNumber, setCurrentStepNumber] = useState(1); // Hook for visible section state
-  const headerRef = useRef(null); // Header height reference
-
-  const doScroll = id => {
-    document.getElementById(id).scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  };
-
-  // Gets the top and bottom y offsets of a given element
-  const getDimensions = ele => {
-    const { height } = ele.getBoundingClientRect();
-    const offsetTop = ele.offsetTop;
-    const offsetBottom = offsetTop + height;
-
-    return {
-      height,
-      offsetTop,
-      offsetBottom
-    };
-  };
-
-  // Finds the current visible section
-  useEffect(() => {
-    const handleScroll = () => {
-      const { height: headerHeight } = getDimensions(headerRef.current);
-      const scrollPosition = window.scrollY + headerHeight;
-
-      const currentIndex = Steps.steps.findIndex( (_, index) =>  {
-        const ele = document.getElementById(stepIDName(index + 1))
-
-        if (ele) {
-          const { offsetBottom, offsetTop } = getDimensions(ele);
-          return scrollPosition >= offsetTop && scrollPosition < offsetBottom;
-        }
-        return false
-      });
-
-      if (currentIndex === undefined) {
-        return 
-      };
-
-      const stepNumber = currentIndex + 1
-
-      if (stepNumber !== currentStepNumber) {
-        setCurrentStepNumber(stepNumber);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentStepNumber]);
 
   return (
     <div className='app'>
-      <div className='header' ref={headerRef}>
-        <h1>Clear My Missouri Record</h1>
-      </div>
-
-      <div className='content'>
-        <div className='steps'>
-          {Steps.steps.map((data, index) => {
-            return (
-              <Step
-                key={index.toString()}
-                stepNumber={index + 1}
-                {...data}
+      <Router>
+        <div className='header'>
+          <h1>Clear My Missouri Record</h1>
+          <div align='center'>
+            {routes.map((route) => (
+              <HeaderLink 
+                activeOnlyWhenExact={true}
+                to={route.path}
+                label={route.label}
               />
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-      <Hidden mdDown>
-        <div className='navbar'>
-          <ol className='navbar-sticky'>
-            {Steps.steps.map((step, index) => {
-              return (
-                <NavBar
-                  key={index.toString()}
-                  onClick={() => doScroll(stepIDName(index + 1))}
-                  isCurrent={currentStepNumber === index + 1}
-                  name={step.navName}
-                />
-              );
-            })}
-          </ol>
+        <ScrollToTop />
+        <Switch>
+          {routes.map((route) => (
+            <Route 
+              exact path={route.path} 
+              component={route.component} 
+              key={route.path}
+            />
+          ))}
+          <Redirect 
+            exact from={homePath}
+            to={routes[0].path} 
+          />
+          <Route component={NoMatch} />
+        </Switch>
+        <div className='bottom-spacer' />
+        <div className='footer'>
+          <div className='footer-content'>footer placeholder</div>
         </div>
-      </Hidden>
-      <div className='bottom-spacer' />
-      <div className='footer'>
-        <div className='footer-content'>footer placeholder</div>
-      </div>
+      </Router>
     </div>
   );
 }
