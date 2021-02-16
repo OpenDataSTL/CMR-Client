@@ -1,7 +1,13 @@
 # CMR-Client
 
+## Requirements 
+- the Node Package manager (NPM) 
+- a git client ( assumes familarity if you're using this website) 
+
 ## Getting Started
-- run "npm install" to download all dependencies.
+- clone the project (git clone < clone url above) 
+- run "npm install" to download all dependencies. 
+- run "npm start" to run the project.
 - If you are new to React, read the "React Docs" documentation 
 
 ## Clear my record
